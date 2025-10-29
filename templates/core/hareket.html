@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Particles Background</title>
+  <style>
+    body, html {
+      margin: 0;
+      height: 100%;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      color: white;
+      text-align: center;
+    }
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+    .content {
+      position: relative;
+      z-index: 2;
+      top: 40%;
+      transform: translateY(-50%);
+    }
+    .content h1 {
+      font-size: 48px;
+      font-weight: 300;
+    }
+    .content h1 span {
+      font-weight: 700;
+    }
+    .btn {
+      border: 2px solid white;
+      padding: 10px 30px;
+      border-radius: 30px;
+      color: white;
+      text-decoration: none;
+      transition: 0.3s;
+    }
+    .btn:hover {
+      background: white;
+      color: #ff9a9e;
+    }
+  </style>
+</head>
+<body>
+
+<div id="particles-js"></div>
+
+<div class="content">
+  <h1>We love to create <span>Beautiful</span> websites</h1>
+  <a href="#" class="btn">Get in touch</a>
+</div>
+
+<!-- particles.js kütüphanesi -->
+<script src="https://cdn.jsdelivr.net/npm/particles.js"></script>
+
+<!-- ayar dosyası -->
+<script>
+particlesJS("particles-js", {
+  "particles": {
+    "number": { "value": 80 },
+    "size": { "value": 3 },
+    "color": { "value": "#ffffff" },
+    "line_linked": {
+      "enable": true,
+      "distance": 150,
+      "color": "#ffffff",
+      "opacity": 0.4,
+      "width": 1
+    },
+    "move": { "enable": true, "speed": 3 }
+  },
+  "interactivity": {
+    "events": {
+      "onhover": { "enable": true, "mode": "repulse" }
+    }
+  },
+  "retina_detect": true
+});
+</script>
+
+</body>
+</html>

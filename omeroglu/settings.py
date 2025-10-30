@@ -38,6 +38,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core',
+    'django_ckeditor_5',
+
+
+
 
 ]
 
@@ -124,8 +128,33 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
 STATICFILES_DIRS = (
     BASE_DIR / 'core/static',
 )
+STATIC_ROOT = BASE_DIR / "static_collected"
+MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_URL = '/media/'
 
+CKEDITOR_5_UPLOAD_PATH = "uploads/"
+CKEDITOR_5_IMAGE_BACKEND = "pillow"
+
+    # settings.py
+CKEDITOR_5_CONFIGS = {
+    'default': {
+        'toolbar': ['bold', 'italic', 'underline', 'link', 'numberedList', 'bulletedList'],
+        'height': 300,
+        'width': '100%',
+    },
+    'extends': {
+        'toolbar': [
+            'heading', '|', 'bold', 'italic', 'link', 'underline', 'blockQuote',
+            'imageUpload', 'insertTable', 'mediaEmbed', 'undo', 'redo',
+            '|', 'alignment', 'outdent', 'indent',
+            '|', 'fontSize', 'fontColor', 'fontBackgroundColor',
+        ],
+        'height': 400,
+        'width': '100%',
+    },
+}
 

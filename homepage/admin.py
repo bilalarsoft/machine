@@ -4,7 +4,7 @@ from django.utils.html import format_html
 from django.db import models            # <-- DB alan tipi buradan
 from django.forms import Textarea        # <-- Widget buradan
 
-from .models import Hero_section, About_section, Statistics_area, Our_values, Faq
+from .models import Hero_section, About_section, Statistics_area, Our_values, Faq, Business_partner
 
 class CompactTextareaAdmin(admin.ModelAdmin):
     formfield_overrides = {
@@ -71,21 +71,12 @@ class AboutSectionAdmin(CompactTextareaAdmin):
 # 3) STATISTICS (Sayaçlar) — genelde tek kayıt
 # =======================
 @admin.register(Statistics_area)
-class StatisticsAdmin(admin.ModelAdmin):
-    list_display = ("customer_number", "project_number", "product_number", "blog_number", "toplam")
-    list_editable = ("project_number", "product_number", "blog_number")  # listedeyken hızlı düzenleme
-    ordering = ("-customer_number",)
-
-    @admin.display(description="Toplam")
-    def toplam(self, obj):
-        return obj.customer_number + obj.project_number + obj.product_number + obj.blog_number
-
-    # Tek kayıtla sınırla (opsiyonel ama önerilir)
-    def has_add_permission(self, request):
-        if Statistics_area.objects.count() >= 1:
-            return False
-        return super().has_add_permission(request)
-
+class StatisticsAreaAdmin(admin.ModelAdmin):
+    list_display = ('title', 'value', 'icon')  # listede görünecek sütunlar
+    search_fields = ('title',)                 # başlığa göre arama
+    list_filter = ('title',)                   # filtreleme (isteğe bağlı)
+    ordering = ('title',)                      # alfabetik sıralama
+    list_editable = ('value', 'icon')          # listedeyken düzenlenebilsin
 
 # =======================
 # 4) OUR VALUES (Değerlerimiz)
@@ -128,3 +119,15 @@ class FaqAdmin(CompactTextareaAdmin):
     @admin.display(description="Cevap")
     def short_answer(self, obj):
         return (obj.answer[:70] + "…") if obj.answer and len(obj.answer) > 70 else obj.answer
+
+@admin.register(Business_partner)
+class BusinessPartnerAdmin(CompactTextareaAdmin):
+    list_display = ("name","img_alt")
+    search_fields = ("name",)
+    ordering = ("name",)
+
+    @admin.display(description="Önizleme")
+    def image_preview(self, obj):
+        if obj.image:
+            return format_html('<img src="{}" style="height:80px;border-radius:6px;" />', obj.image.url)
+        return "—"

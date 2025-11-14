@@ -15,7 +15,7 @@ class Company(models.Model):
     phone = models.CharField(validators=[phone_validator], max_length=11, blank=True,verbose_name='Telefon Numarası')
     whatsapp = models.CharField(max_length=200,verbose_name='Whatsapp Numarası')
     mail_address = models.EmailField(verbose_name='Mail Adresi')
-
+    logo = models.ImageField(upload_to='logos', verbose_name='Logo Girdi')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 

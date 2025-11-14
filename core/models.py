@@ -1,4 +1,6 @@
 from django.db import models
+from django.db.models import Q
+from django.views.decorators.http import condition
 from django_ckeditor_5.fields import CKEditor5Field
 # Create your models here.
 class Category(models.Model):
@@ -58,18 +60,38 @@ class Product(models.Model):
         verbose_name_plural = 'Ürünler'
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE,related_name='images')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,related_name='image')
     image = models.ImageField(upload_to="product_images/",verbose_name='Fotoğraf')
     alt_text = models.CharField(max_length=100,blank=True,null=True,verbose_name="Fotoğraf Alt Başlığı")
+    is_cover = models.BooleanField(default='False',verbose_name='Kapak Fotoğrafı Mı?')
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.product.name
+        return f"{self.product.name} - {'Kapak' if self.is_cover else 'Görsel'}"
 
     class Meta:
         ordering = ['id']
-        verbose_name_plural = 'Product Image'
+        verbose_name_plural = 'Ürün Fotoğrafı'
+        constraints = [
+            models.UniqueConstraint(
+                fields=['product'],
+                condition=models.Q(is_cover=True),
+                name='unique_cover_per_product'
+            )
+
+        ]
+
+    def save(self, *args, **kwargs):
+        # önce ben kaydolayım (pk lazım olacak)
+        super().save(*args, **kwargs)
+        # sonra kapaksam diğerlerini indir
+        if self.is_cover:
+            (self.__class__.objects
+             .filter(product=self.product, is_cover=True)
+             .exclude(pk=self.pk)
+             .update(is_cover=False))
+
 
 
 class ProductVideo(models.Model):

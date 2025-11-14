@@ -2,6 +2,7 @@ from django.shortcuts import render
 from homepage.models import *
 from companyinfo.models import *
 from urllib.parse import urlparse, parse_qs
+from core.models import *
 # Create your views here.
 
 from django.http import HttpResponse
@@ -33,10 +34,19 @@ def index(request):
         'hero_section': Hero_section.objects.first(),
         'about_section': About_section.objects.first(),
         'statistic_area': Statistics_area.objects.all(),
-        'our_values' : Our_values.objects.first(),
+        'our_values' : Our_values.objects.all(),
         'faq' : Faq.objects.all(),
         'company' : Company.objects.first(),
         'hero_youtube_embed': yt_embed_url(hero.youtube_url) if hero else '',
+        'categories' : Category.objects.all(),
+        'series' : SeriesCategory.objects.all(),
+        'models' : ModelCategory.objects.all(),
+        'products' : Product.objects.all(),
+        'product_img' : ProductImage.objects.first(),
+        'business_partner' : Business_partner.objects.all(),
+        'branches' : Branch.objects.all(),
+        'phone_number' : BranchPhoneNumber.objects.all(),
 
     }
     return render(request,'core/index.html',context)
+

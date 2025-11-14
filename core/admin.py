@@ -1,17 +1,33 @@
 from django.contrib import admin
+from django.forms import BaseInlineFormSet
+
 from .models import Category, SeriesCategory, ModelCategory, Product, ProductImage, ProductVideo
 
 
 # ======================
 # Inline Görünümler
 # ======================
+class ProductImageInlineFormSet(BaseInlineFormSet):
+    def clean(self):
+        super().clean()
+        cover_count = 0
+        for form in self.forms:
+            if not form.cleaned_data or form.cleaned_data.get('DELETE'):
+                continue
+            if form.cleaned_data.get('is_cover'):
+                cover_count += 1
+        if cover_count > 1:
+            from django.core.exceptions import ValidationError
+            raise ValidationError("Bir üründe yalnızca 1 kapak görseli seçebilirsiniz.")
+
 
 class ProductImageInline(admin.TabularInline):
     model = ProductImage
     extra = 1
-    fields = ('image', 'alt_text')
+    fields = ('image', 'alt_text','is_cover')
     verbose_name = "Ürün Görseli"
     verbose_name_plural = "Ürün Görselleri"
+    formset = ProductImageInlineFormSet
 
 
 class ProductVideoInline(admin.TabularInline):

@@ -29,17 +29,18 @@ class About_section(models.Model):
         verbose_name = 'Hakkında'
         verbose_name_plural = 'Hakkında'  # veya 'Hakkında Bölümleri'
 
+# models.py
 class Statistics_area(models.Model):
-    customer_number = models.IntegerField(verbose_name='Müşteri Sayısı')
-    project_number = models.IntegerField(verbose_name='Proje Sayısı')
-    product_number = models.IntegerField(verbose_name='Ürün Sayısı')
-    blog_number = models.IntegerField(verbose_name='Blog Sayısı')
+    title= models.CharField(max_length=100, verbose_name='Başlık')
+    value = models.IntegerField(verbose_name='Değer')
+    icon  = models.CharField(max_length=100, verbose_name='İkon')
+
 
     def __str__(self):
-        return f"Müşteri:{self.customer_number} / Proje:{self.project_number}"
+        return f"Başlık:{self.title} / Değer:{self.value}"
 
     class Meta:
-        ordering = ['customer_number']
+        ordering = ['title']   # <-- düzeltme
         verbose_name = 'İstatistik'
         verbose_name_plural = 'İstatistikler'
 
@@ -67,3 +68,14 @@ class Faq(models.Model):
         ordering = ['question']
         verbose_name = "Sık Sorulan Soru"
         verbose_name_plural = 'Sık Sorulan Sorular'
+
+class Business_partner(models.Model):
+    name = models.CharField(max_length=100, verbose_name="Firma İsmi")
+    image = models.ImageField(upload_to='business_partner', verbose_name='Fotoğraf')
+    img_alt = models.CharField(max_length=100,verbose_name="Fotoğraf Alt Etiketi")
+
+    def __str__(self):
+        return self.name
+    class Meta:
+        ordering = ['name']
+        verbose_name_plural = 'Çalıştığım Firmalar'

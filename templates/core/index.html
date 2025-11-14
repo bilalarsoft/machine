@@ -161,10 +161,11 @@
 
 
 
-    <!-- Stats Section -->
+    <!-- Stats Section
 
 
-  <section id="stats" class="stats section"> <div class="container" data-aos="fade-up" data-aos-delay="100"> <div class="row gy-4"> {% for stats in statistic_area %} <div class="col-lg-3 col-md-6"> <div class="stats-item d-flex align-items-center w-100 h-100"> <i class="{{ stats.icon }} color-blue flex-shrink-0"></i> <div> <span data-purecounter-start="0" data-purecounter-end="{{ stats.value }}" data-purecounter-duration="1" class="purecounter"></span> <p>{{ stats.title }}</p> </div> </div> </div> {% endfor %} </div> </div> </section><!-- /Stats Section -->
+  <section id="stats" class="stats section"> <div class="container" data-aos="fade-up" data-aos-delay="100"> <div class="row gy-4"> {% for stats in statistic_area %} <div class="col-lg-3 col-md-6"> <div class="stats-item d-flex align-items-center w-100 h-100"> <i class="{{ stats.icon }} color-blue flex-shrink-0"></i> <div> <span data-purecounter-start="0" data-purecounter-end="{{ stats.value }}" data-purecounter-duration="1" class="purecounter"></span> <p>{{ stats.title }}</p> </div> </div> </div> {% endfor %} </div> </div> </section>
+   /Stats Section -->
 
 
 <!-- /Stats Section -->
@@ -375,11 +376,10 @@
         <h2>Kategori</h2>
         <p>Kategori ve Modeller<br></p>
       </div>
-
       <div class="container">
         <div class="row gy-4">
         {% for serie in series %}
-          <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="{{ forloop.counter|add:"0" }}000" data-aos-duration="1000" data-aos-offset="30">
+          <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="{{ forloop.counter|add:"0" }}00" data-aos-duration="1500" data-aos-offset="30">
             <div class="pricing-tem">
             <div class="price">{{ forloop.counter }}</div>
             <br>
@@ -569,47 +569,95 @@
       </div>
     </section> /Testimonials Section -->
 
-    <!-- Team Section -->
+    <!-- Team Section
     <section id="team" class="team section">
-  <div class="container section-title" data-aos="fade-up">
-    <h2>Ürünlerimiz</h2>
-    <p>Tüm ürün çeşitlerimiz</p>
-  </div>
+      <div class="container section-title" data-aos="fade-up">
+        <h2>Team</h2>
+        <p>Our hard working team</p>
+      </div>
 
-  <div class="container">
-    <div class="row gy-4">
-      {% for product in products %}
-        <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
-          <div class="team-member">
-            <div class="member-img">
-              {% with cover=product.get_cover_image %}
-                {% if cover %}
-                  <img src="{{ cover.image.url }}">
-                {% elif product.images.first %}
-                  <img src="{{ product.images.first.image.url }}">
-                {% else %}
-                  <img src="{% static 'core/img/not-found.png' %}">
-                {% endif %}
-              {% endwith %}
-              <div class="social">
-                <a href=""><i class="bi bi-facebook"></i></a>
-                <a href=""><i class="bi bi-instagram"></i></a>
-                <i class="bi bi-arrow-right-circle-fill"></i>
+      <div class="container">
+        <div class="row gy-4">
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="100">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="{% static 'core/img/team/team-1.jpg' %}" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter-x"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Walter White</h4>
+                <span>Chief Executive Officer</span>
+                <p>Velit aut quia fugit et et...</p>
               </div>
             </div>
-            <div class="member-info">
-              <h4>{{ product.name }}</h4>
-              <span>{{ product.category }} / {{ product.series }} / {{ product.model }}</span>
-              <p>{{ product.description }}</p>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="200">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="{% static 'core/img/team/team-2.jpg' %}" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter-x"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Sarah Jhonson</h4>
+                <span>Product Manager</span>
+                <p>Quo esse repellendus quia id...</p>
+              </div>
             </div>
           </div>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-</section>
 
-      <!--/Team Section -->
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="300">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="{% static 'core/img/team/team-3.jpg' %}" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter-x"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>William Anderson</h4>
+                <span>CTO</span>
+                <p>Vero omnis enim consequatur...</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="400">
+            <div class="team-member">
+              <div class="member-img">
+                <img src="{% static 'core/img/team/team-4.jpg' %}" class="img-fluid" alt="">
+                <div class="social">
+                  <a href=""><i class="bi bi-twitter-x"></i></a>
+                  <a href=""><i class="bi bi-facebook"></i></a>
+                  <a href=""><i class="bi bi-instagram"></i></a>
+                  <a href=""><i class="bi bi-linkedin"></i></a>
+                </div>
+              </div>
+              <div class="member-info">
+                <h4>Amanda Jepson</h4>
+                <span>Accountant</span>
+                <p>Rerum voluptate non adipisci animi...</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section> /Team Section -->
  <!-- Values Section -->
     <section id="values" class="values section">
       <div class="container section-title" data-aos="fade-up">

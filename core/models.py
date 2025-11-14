@@ -60,7 +60,7 @@ class Product(models.Model):
         verbose_name_plural = 'Ürünler'
 
 class ProductImage(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE,related_name='image')
+    product = models.ForeignKey(Product, on_delete=models.CASCADE,related_name='images')
     image = models.ImageField(upload_to="product_images/",verbose_name='Fotoğraf')
     alt_text = models.CharField(max_length=100,blank=True,null=True,verbose_name="Fotoğraf Alt Başlığı")
     is_cover = models.BooleanField(default='False',verbose_name='Kapak Fotoğrafı Mı?')

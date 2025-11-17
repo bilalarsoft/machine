@@ -276,7 +276,7 @@
       <div class="container">
         <div class="row gy-4">
         {% for serie in series %}
-          <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="{{ forloop.counter|add:"0" }}00" data-aos-duration="1500" data-aos-offset="30">
+          <div class="col-lg-4 col-md-6" data-aos="zoom-in" data-aos-delay="{{ forloop.counter|add:"0" }}000" data-aos-duration="1500" data-aos-offset="30">
             <div class="pricing-tem">
             <div class="price">{{ forloop.counter }}</div>
             <br>
@@ -702,7 +702,7 @@
                 {% elif count <= 4 %} col-lg-6 col-md-6
                 {% else %} col-lg-4 col-md-6
                 {% endif %}
-              " data-aos="fade-up" data-aos-delay="{{ forloop.counter|add:1 }}00">
+              " data-aos-delay="{{ forloop.counter|add:1 }}0">
                 <div class="faq-container">
                   <div class="faq-item">
                     <h3>{{ sss.question }}</h3>
@@ -812,3 +812,4 @@
   </main>
 
 {% endblock %}
+

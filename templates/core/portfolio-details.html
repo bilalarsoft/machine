@@ -52,21 +52,13 @@
 
               <div class="swiper-wrapper align-items-center">
 
-                <div class="swiper-slide">
-                  <img src="{% static 'core/img/portfolio/app-1.jpg'%}" alt="">
-                </div>
+                {% for image in product.images.all %}
+                  <div class="swiper-slide">
+                    <img src="{{ image.image.url }}" alt="{{ product.name }}">
+                  </div>
+                {% endfor %}
 
-                <div class="swiper-slide">
-                  <img src="{% static 'core/img/portfolio/product-1.jpg'%}" alt="">
-                </div>
 
-                <div class="swiper-slide">
-                  <img src="{% static 'core/img/portfolio/branding-1.jpg'%}" alt="">
-                </div>
-
-                <div class="swiper-slide">
-                  <img src="{% static 'core/img/portfolio/books-1.jpg'%}" alt="">
-                </div>
 
               </div>
               <div class="swiper-pagination"></div>
@@ -75,18 +67,22 @@
 
           <div class="col-lg-4">
             <div class="portfolio-info" data-aos="fade-up" data-aos-delay="200">
-              <h3>Project information</h3>
+              <h3>{{ product.name}}</h3>
               <ul>
-                <li><strong>Category</strong>: Web design</li>
-                <li><strong>Client</strong>: ASU Company</li>
-                <li><strong>Project date</strong>: 01 March, 2020</li>
-                <li><strong>Project URL</strong>: <a href="#">www.example.com</a></li>
+                <li><strong>Kategori</strong>: {{ product.category.name }}</li>
+                <li><strong>Seri</strong>: {{ product.series.name }}</li>
+                <li><strong>Model</strong>: {{ product.model.name }}</li>
+
+
+                   <li><strong>Boyut (En/Boy/Yük.) </strong>: {{ product.width }}cm /{{ product.height }}cm /{{ product.depth }}cm</li>
+                   <li><strong>Stok</strong>: {{ product.stock }}</li>
+
               </ul>
             </div>
             <div class="portfolio-description" data-aos="fade-up" data-aos-delay="300">
-              <h2>Exercitationem repudiandae officiis neque suscipit</h2>
+              <h2>Ürün Açıklaması</h2>
               <p>
-                Autem ipsum nam porro corporis rerum. Quis eos dolorem eos itaque inventore commodi labore quia quia. Exercitationem repudiandae officiis neque suscipit non officia eaque itaque enim. Voluptatem officia accusantium nesciunt est omnis tempora consectetur dignissimos. Sequi nulla at esse enim cum deserunt eius.
+                  {{ product.description|safe}}
               </p>
             </div>
           </div>

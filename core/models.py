@@ -1,6 +1,7 @@
 from django.db import models
 from django.db.models import Q
 from django.views.decorators.http import condition
+from django.utils.text import slugify
 from django_ckeditor_5.fields import CKEditor5Field
 # Create your models here.
 class Category(models.Model):
@@ -51,6 +52,7 @@ class Product(models.Model):
     stock = models.IntegerField(verbose_name="Stok Adedi")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)
+    slug = models.SlugField(unique=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -58,6 +60,10 @@ class Product(models.Model):
     class Meta:
         ordering = ['name']
         verbose_name_plural = 'Ürünler'
+    def save(self, *args, **kwargs):
+        if not self.slug:
+            self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
 class ProductImage(models.Model):
     product = models.ForeignKey(Product, on_delete=models.CASCADE,related_name='images')

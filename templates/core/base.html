@@ -1,0 +1,20 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+
+{% include 'core/partials/head.html' %}
+
+<body class="{% block bodyClass %} {% endblock %}">
+    {% include 'core/partials/header.html' %}
+
+    {% block content %}
+            <!-- Sayfaya özel içerik gelir -->
+    {% endblock %}
+
+
+    {% include 'core/partials/footer.html' %}
+    {% include 'core/partials/js.html' %}
+</body>
+</html>

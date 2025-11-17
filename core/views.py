@@ -1,8 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from homepage.models import *
 from companyinfo.models import *
 from urllib.parse import urlparse, parse_qs
 from core.models import *
+
 # Create your views here.
 
 from django.http import HttpResponse
@@ -50,3 +51,19 @@ def index(request):
     }
     return render(request,'core/index.html',context)
 
+def product_detail(request, slug):
+    product = get_object_or_404(Product, slug=slug)
+
+
+    context = {
+        'product': product,
+        'company': Company.objects.first(),
+        'categories': Category.objects.all(),
+        'series': SeriesCategory.objects.all(),
+        'models': ModelCategory.objects.all(),
+        'products': Product.objects.all(),
+        'product_img': ProductImage.objects.first(),
+        'branches': Branch.objects.all(),
+        'phone_number': BranchPhoneNumber.objects.all(),
+    }
+    return render(request, 'core/portfolio-details.html', context)
